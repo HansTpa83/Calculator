@@ -1,12 +1,14 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-const Key = ({btn,  addCalcul}) => {
+const Key = ({btn,  addCalcul, equals}) => {
 
     if (btn === '='){
         return (
             <View>
-                <Text style={styles.equal}>
+                <Text style={styles.equal}
+                    onPress={() => equals()}
+                >
                     {btn}   
                 </Text>
             </View>

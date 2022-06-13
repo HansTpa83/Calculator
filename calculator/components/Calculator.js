@@ -1,27 +1,34 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
+import { evaluate } from 'mathjs'
 
 import Key from './Key.js'
 import Screen from './Screen.js';
 
 const Calculator = () => {
     const [calcul, setCalcul] = useState('')
-    const [result, setResult] = useState('')
+    const [result, setResult] = useState()
 
     const addCalcul = (val) => {
+        console.log(val)
         if(val === 'C'){
             setCalcul('')
         } else if(val === '='){
-            console.log("=")
+            
         }else {
             setCalcul((calcul) => [...calcul, val])
         }
     }
 
+    const equal = () => {
+        let cal = calcul.join('')
+        setResult(evaluate(cal))
+    }
+
     return (
         <View style={styles.container}>
             
-            <Screen style={styles.screen} calcul={calcul}/>
+            <Screen style={styles.screen} calcul={calcul} result={result}/>
 
             <View style={styles.separator}>
                 <View style={styles.keyboard}>
@@ -55,7 +62,7 @@ const Calculator = () => {
                 <View style={styles.keyboard}>
                     <Key addCalcul={addCalcul} btn={'0'}/>
                     <Key addCalcul={addCalcul} btn={'.'}/>
-                    <Key addCalcul={addCalcul} btn={'='}/>
+                    <Key equals={equal} btn={'='}/>
                 </View>
             </View>
 
